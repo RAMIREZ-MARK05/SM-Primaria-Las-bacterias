@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>El mundo de las bacterias</title>
+<script src="js/easeljs-0.4.2.min.js"></script>
+<script src="js/tweenjs-0.2.0.min.js"></script>
+<script src="js/movieclip-0.4.1.min.js"></script>
+<script src="js/preloadjs-0.1.0.min.js"></script>
+<script src="js/index.js"></script>
+<script src="js/funciones.js"></script>
+<script src="js/transform.js"></script>
+<script src="data/texts/textos.js"></script>
+<link rel="stylesheet" href="css/fontface.css" type="text/css" />
+<link rel="stylesheet" href="css/index.css" type="text/css" />
+<script>
+var canvas, stage, exportRoot, images;
+
+function init() {
+	canvas = document.getElementById("canvas");
+	images = {};
+
+	var manifest = [
+		{src:"data/imgs/red.png", id:"red"},
+		{src:"data/imgs/tunelFin.jpg", id:"tunelFin"},
+		{src:"data/imgs/tunel.jpg", id:"tunel"}
+	];
+
+	var loader = new PreloadJS(false);
+	loader.onFileLoad = handleFileLoad;
+	loader.onComplete = handleComplete;
+	loader.loadManifest(manifest);
+	
+	constructora();
+}
+
+function handleFileLoad(o) {
+	if (o.type == "image") { images[o.id] = o.result; }
+}
+
+function handleComplete() {
+	exportRoot = new lib.index();
+
+	stage = new Stage(canvas);
+	stage.addChild(exportRoot);
+	stage.update();
+
+	Ticker.setFPS(24);
+	Ticker.addListener(stage);
+}
+</script>
+</head>
+<body onload="init();" style="background-color:#D4D4D4">
+<div id='canvita'>
+<div id="contenedorPrincipal">
+<div id="topBarra">
+<div id="enunciadoGeneral"></div>
+<div id="logo"></div>
+</div>
+<div id="bottomBarra"></div>
+<canvas id="canvas" width="700" height="430" style="background-color:#ffffff"></canvas>
+</div>
+</div>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"719f7096caba6e03","token":"26ae7321be1940b294b85563a73418cc","version":"2021.12.0","si":100}' crossorigin="anonymous"></script>
+</body>
+</html>
